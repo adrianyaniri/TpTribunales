@@ -16,9 +16,8 @@ juzgado.recibirExpediente(expediente3)
 
 
 
-tribunal = Tribunales(cantPiso= 2, cantOf = 3)
+tribunal = Tribunales(pisos = 3 ,oficinas = 3)
 tribunal.establecerJuzgado(0,0,juzgado)
 tribunal.establecerJuzgado(0,1,juzgado)
-#oficina = tribunal.getOficina()
-#print(oficina.esCritico())
+tribunal.establecerJuzgado(0,2,juzgado)
 print(tribunal.cantidadDeJuzgadosCriticos(0))
