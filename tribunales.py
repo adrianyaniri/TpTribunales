@@ -39,7 +39,14 @@ class Tribunales:
 
         return cantidad
 
+    def totalExpEnOfic(self):
+        return self.oficinaActual().cantidadTotalExp()
 
+    def juzgadoMenosRecargado(self):
+        juzgado = None
+        for p in range(self.cantPisos()):
+            for o in range(self.cantOficinas()):
+                print('hola')
 
 
 
