@@ -8,10 +8,12 @@ class Fuero(int, Enum):
     familiar = 4
     comercial = 5
 
+# class para determinar la prioridad del expediente
 class Prioridad(int,Enum):
     normal = 1
     urgente = 2
 
+# class para determina el estado del expediente
 class Estado(int,Enum):
     investigacion = 1
     enJuicio = 2
