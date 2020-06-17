@@ -1,5 +1,6 @@
 # TDA tipo expediente
 from condiciones import*
+from funAux import*
 
 
 
@@ -26,10 +27,6 @@ class Expediente:
 # obtiene el numero del expediente
     def getNroExp(self):
         return  self.nroExpediente
-
-# retorna si el estado del expediente es enJucio
-    def estaEnJucio(self):
-        return self.estado == Estado.enJuicio
 
     def __repr__(self):
         cadena = 'nro Expediente: ' + str(self.nroExpediente) + '\nfuero de la causa: '+ str(self.fuero.name) + '\nprioridad: ' +  str(self.prioridad.name) +'\nestado de la causa: ' + str(self.estado.name)

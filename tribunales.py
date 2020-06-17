@@ -33,10 +33,13 @@ class Tribunales:
         if not self.tribunales[piso][of]:
             self.tribunales[piso][of] = juzgado
 
+
+#indica la cantidad de juzgados critricos que hay un piso
+# tiene que comparar si la oficina esta vacia o el juzgado es critico
     def criticoEnPiso(self,piso, oficina = 0):
         cant = 0
         print(oficina == len(self.tribunales[piso])-1)
-        
+
         print(cant)
 
 # retorna el juzgado con menos expediente del edificion
@@ -53,7 +56,7 @@ class Tribunales:
                   #menosCargado = urgente
                   piso = i
                   oficina = j
-        return i,j
+        return piso, oficina
 
 #busca al juez pasado por parametro, en el edificio
 
@@ -71,6 +74,7 @@ class Tribunales:
 # Primero cargamos los resultados de buscarJuez con el str como parametro a las variables piso y oficina  para encontrar la oficina donde trabaja el juez ,
     # despues preguntamos si la pila de expedientes esta NO esta vacia y si NO es critico para darles todos los expedientes a ese juez ,
     #  sino realizamos el mismo procedimiento que buzcarJuez pero con juzgadoMenosCargado para saber que juez tiene menos urgentes , lo localizamos y le damos todos los expedientes
+
     def mesaDeEntrada(self,pilaExp, juez):
         piso, oficina = self.buscarJuez(juez)   #funcio para buscar al juez
         oficina = self.oficinaActual(piso,oficina) # obtiene la ofical actual

@@ -1,20 +1,23 @@
 from cola import*
 from expediente import*
 from stack import*
+from funAux import*
 
 
 # TDA tipo Juzgado
 
 class Juzgado:
     # funcion contrictor
-    def __init__(self,nombre):
+    def __init__(self,nombre,cant = 50 ):
         self.nombre = nombre # nombre del juez
+        self.cantCritica = cant  # indica la cantidad de expedientes
         self.urgente = Cola()
         self.normal =  Cola()
 
     def __repr__(self):
         cadena = 'nombre del juzgado: '+ self.nombre + '\n' + 'expedientes prioridad normal: '+str(self.normal) + '\n'+ 'expedientes prioridad urgente: '+str(self.urgente)
         return cadena
+
 # retorna el nombre del juez del juzgado2
     def getNombre(self):
         return str(self.nombre)
@@ -30,7 +33,7 @@ class Juzgado:
 # recibe un expediente y lo agrega a la cola correspondiente
 # informa si la cantida de expedinte de cada cola excede la cantidad critica
     def recibirExpediente(self,expediente):
-        cantCritica = 50
+        cantCritica = self.cantCritica
         if expediente.esNormal():
             self.normal.queue(expediente)
         else:
@@ -67,6 +70,7 @@ class Juzgado:
         else:
             exp = self.normal.dequeue()
         return exp
+
 #devuelve la cantidad de expedinte que tiene el juzgado en ambas colas
     def cantidadTotalExp(self):
         sumNormal = self
@@ -79,8 +83,21 @@ class Juzgado:
 
 #retorna True si la cantidad de expedinte de cada cola supera la cantida critica
     def esCritico(self):
-        cantCritica = 20
+        cantCritica = self.cantCritica
         return self.urgente.lenQueue() > cantCritica or self.normal.lenQueue() > cantCritica
+
+    def enJucioEnExp(self,cola):
+        aux = cola.clonar()
+        cant = 0
+
+        while not aux.isEmpty():
+            if estaEnJucio(aux.top()):
+                cant += 1
+                aux.dequeue()
+        return cant
+
+    def enJucio2(self):
+        return 'cantidad de Expediente en jucico: ',self.enJucioEnExp(self.urgente) + self.enJucioEnExp(self.normal)
 
 # retorna la cantidad de expedientes que tienen estado en enJuicio
     def enJucio(self):
@@ -89,12 +106,12 @@ class Juzgado:
         cant = 0
 
         while not auxUrgente.isEmpty():
-            if auxUrgente.top().estaEnJucio():
+            if estaEnJucio(auxUrgente.top()):
                 cant += 1
             auxUrgente.dequeue()
 
         while not auxNormal.isEmpty():
-            if auxNormal.top().estaEnJucio():
+            if estaEnJucio(auxNormal.top()):
                 cant += 1
             auxNormal.dequeue()
         return 'cantidad de expedientes en juicio: ', cant

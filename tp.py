@@ -1,6 +1,7 @@
 
 from juzgados import*
 from tribunales import*
+from funAux import*
 
 
 # configura los TDA expedientes
@@ -22,10 +23,8 @@ juzgado2 = Juzgado('mas')
 juzgado2.recibirExpediente(expediente4)
 juzgado2.recibirExpediente(expediente3)
 
-juzgado2.cambiarDeEstado(4)
-print(juzgado2)
 
-
+print(juzgado.enJucio())
 
 # crea una pila con expedientes
 pilaExp = Stack()
