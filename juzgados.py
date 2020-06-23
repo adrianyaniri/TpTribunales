@@ -86,6 +86,7 @@ class Juzgado:
         cantCritica = self.cantCritica
         return self.urgente.lenQueue() > cantCritica or self.normal.lenQueue() > cantCritica
 
+# funcion que recibe por parametro una cola y calcula cuanto expedientes en estado de jucio
     def enJucioEnExp(self,cola):
         aux = cola.clonar()
         cant = 0
@@ -96,25 +97,9 @@ class Juzgado:
                 aux.dequeue()
         return cant
 
-    def enJucio2(self):
-        return 'cantidad de Expediente en jucico: ',self.enJucioEnExp(self.urgente) + self.enJucioEnExp(self.normal)
-
-# retorna la cantidad de expedientes que tienen estado en enJuicio
+# funcion que calcula cuantos expedientes esta en estado de Jucio
     def enJucio(self):
-        auxUrgente = self.urgente.clonar()
-        auxNormal = self.normal.clonar()
-        cant = 0
-
-        while not auxUrgente.isEmpty():
-            if estaEnJucio(auxUrgente.top()):
-                cant += 1
-            auxUrgente.dequeue()
-
-        while not auxNormal.isEmpty():
-            if estaEnJucio(auxNormal.top()):
-                cant += 1
-            auxNormal.dequeue()
-        return 'cantidad de expedientes en juicio: ', cant
+        return 'cantidad de Expediente en jucico: ',self.enJucioEnExp(self.urgente) + self.enJucioEnExp(self.normal)
 
 # busca un expedinte por su numero en un cola pasada por parametro
 # retorna el expedinte buscado

@@ -19,19 +19,26 @@ juzgado.recibirExpediente(expediente1)
 #crea otro juzgado
 juzgado2 = Juzgado('mas')
 
+
+
 #carga los expedientes al juzgado
 juzgado2.recibirExpediente(expediente4)
 juzgado2.recibirExpediente(expediente3)
 
 
-print(juzgado.enJucio())
+
 
 # crea una pila con expedientes
 pilaExp = Stack()
 pilaExp.push(expediente3)
 pilaExp.push(expediente4)
 
-#crea el tribunal con 4piso y 4 oficinas
+#crea el tribunal con 4piso y 4 oficina
 tribunal = Tribunales(4,4)
 #carga el tribunal en el edificio
-tribunal.establecerJuzgado(0,1,juzgado)
+
+tribunal.establecerJuzgado(1,2,juzgado)
+tribunal.establecerJuzgado(2,2,juzgado2)
+print(tribunal)
+tribunal.moverExpediente(120,juzgado,juzgado2)
+print(tribunal)
