@@ -4,6 +4,7 @@ from tribunales import*
 from funAux import*
 
 
+
 # configura los TDA expedientes
 expediente1 = Expediente(130,Fuero.civil,Prioridad.urgente,Estado.enJuicio)
 expediente2 = Expediente(120,Fuero.civil,Prioridad.normal,Estado.enJuicio)
@@ -18,6 +19,7 @@ juzgado.recibirExpediente(expediente1)
 
 #crea otro juzgado
 juzgado2 = Juzgado('mas')
+juzgado2.esCritico()
 
 
 
@@ -26,19 +28,16 @@ juzgado2.recibirExpediente(expediente4)
 juzgado2.recibirExpediente(expediente3)
 
 
-
-
 # crea una pila con expedientes
 pilaExp = Stack()
 pilaExp.push(expediente3)
 pilaExp.push(expediente4)
 
 #crea el tribunal con 4piso y 4 oficina
-tribunal = Tribunales(4,4)
-#carga el tribunal en el edificio
+tribunal = Tribunales(4,6)
 
-tribunal.establecerJuzgado(1,2,juzgado)
-tribunal.establecerJuzgado(2,2,juzgado2)
-print(tribunal)
-tribunal.moverExpediente(120,juzgado,juzgado2)
-print(tribunal)
+tribunal.establecerJuzgado(1,2,juzgado2)
+tribunal.establecerJuzgado(1,1,juzgado)
+
+print(tribunal.obtenerJuzgado(1,2).esCritico())
+print(tribunal.criticosEnPiso(0))

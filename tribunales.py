@@ -1,5 +1,7 @@
 import numpy as np
 from  juzgados import*
+from funAux import*
+from expediente import*
 
 
 class Tribunales:
@@ -19,26 +21,34 @@ class Tribunales:
         return self.oficinas
 
 
-# retorna si la ofcina esta vacia
-#compara la ofcina con un None
-    def oficinaVacia(self,oficina):
-        return oficina !=None
-
 # estable en juzgado en el piso y oficina pasado por parametros
-    def establecerJuzgado(self,piso, of, juzgado):
+    def establecerJuzgado(self,piso , of , juzgado):
         if not self.tribunales[piso][of]:
             self.tribunales[piso][of] = juzgado
 
 
+    def obtenerJuzgado(self,piso,oficina):
+        return self.tribunales[piso][oficina]
+
+
 #indica la cantidad de juzgados critricos que hay un piso
 # tiene que comparar si la oficina esta vacia o el juzgado es critico
-    def criticoEnPiso(self,piso , oficina = 0 ):
-        cant = 0
-        if oficina == len(self.tribunales[piso]):
-            cant += 1
+    def criticosEnPiso(self,piso = 0 , oficina = 0):
+        cant = None
+        if oficina == len(self.tribunales[piso])-1:
+            if not estaVacia(self.obtenerJuzgado(piso,oficina)) and self.obtenerJuzgado(piso,oficina).esCritico():
+                cant = 1
+            else:
+                cant = 0
         else:
-            cant = self.criticoEnPiso(piso, oficina + 1) + cant
+            if not estaVacia(self.obtenerJuzgado(piso, oficina)) and self.obtenerJuzgado(piso,oficina).esCritico():
+                cant = self.criticosEnPiso(piso, oficina + 1) +1
+            else:
+                cant = self.criticosEnPiso(piso,oficina +1)
         return cant
+
+
+
 
 # retorna el juzgado con menos expediente del edificion
 # usa un par de bucles for para recorrerlo
@@ -87,6 +97,9 @@ class Tribunales:
                 oficina.recibirExpediente(pilaExp.pop())
 
    # def moverExp(nroExp, juezOrigen, juezDestino):
+   # recibe por parametro un nro de expediente y un juez origen , un juez de destino
+   # y cambia el expediente de la posicion
+   # elimina el expendiente del juez original
     def moverExpediente(self,nro, juezOrigen, juezDestino):
         juezDestino.recibirExpediente(juezOrigen.buscarExpediente(nro))
         juezOrigen.eliminarExpediente(nro)
