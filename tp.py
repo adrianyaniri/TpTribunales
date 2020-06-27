@@ -39,5 +39,18 @@ tribunal = Tribunales(4,6)
 tribunal.establecerJuzgado(1,2,juzgado2)
 tribunal.establecerJuzgado(1,1,juzgado)
 
-print(tribunal.obtenerJuzgado(1,2).esCritico())
-print(tribunal.criticosEnPiso(0))
+
+
+# obtener la cantidad de juzgados criticos en el piso paso por parmetro
+tribunal.criticosEnPiso(0)
+
+
+# obtiene el numero de juzgados menos
+
+# indica el piso y oficina del juez pasado por parametro
+tribunal.buscarJuez('lopez')
+
+
+tribunal.mesaDeEntrada(pilaExp, 'lopez')
+
+tribunal.moverExpediente(3,juzgado2,juzgado)

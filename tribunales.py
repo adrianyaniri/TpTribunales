@@ -26,13 +26,16 @@ class Tribunales:
         if not self.tribunales[piso][of]:
             self.tribunales[piso][of] = juzgado
 
+# funcion que retorna el juzgado que se encuentra en el piso y oficina pasada por parametros
 
     def obtenerJuzgado(self,piso,oficina):
         return self.tribunales[piso][oficina]
 
 
 #indica la cantidad de juzgados critricos que hay un piso
-# tiene que comparar si la oficina esta vacia o el juzgado es critico
+# primero compara si las oficinas estan vacias
+# despues si es juzgado esta en estado critico
+# con la recursiva calcula el total de oficinas criticas que hay en el piso
     def criticosEnPiso(self,piso = 0 , oficina = 0):
         cant = None
         if oficina == len(self.tribunales[piso])-1:
@@ -87,7 +90,7 @@ class Tribunales:
 
     def mesaDeEntrada(self,pilaExp, juez):
         piso, oficina = self.buscarJuez(juez)   #funcio para buscar al juez
-        oficina = self.oficinaActual(piso,oficina) # obtiene la ofical actual
+        oficina = self.obtenerJuzgado(piso,oficina) # obtiene la ofical actual
         while not pilaExp.estaVacia():
             if not oficina.esCritico():
                 oficina.recibirExpediente(pilaExp.pop())
